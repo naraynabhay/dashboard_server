@@ -15,8 +15,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Define allowed origins
 const allowedOrigins = [
-    'http://localhost:3000',
-    'https://dashboard-client-iv6ues4bu-abhay-narayans-projects.vercel.app'
+     'https://dashboard-client-iv6ues4bu-abhay-narayans-projects.vercel.app',
+    'http://localhost:3000'
+   
 ];
 
 // CORS middleware
