@@ -29,7 +29,7 @@ app.use(cors({
 
 // Route splitting
 app.use("/api/data", reportRouter);
-
+console.log(process.env.PORT);
 // Variables
 const PORT = process.env.PORT || 8000;
 
