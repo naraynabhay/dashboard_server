@@ -14,18 +14,36 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Define allowed origins
-const allowedOrigins = [
-     'https://dashboard-client-iv6ues4bu-abhay-narayans-projects.vercel.app',
-    'http://localhost:3000'
+// const allowedOrigins = [
+//      'https://dashboard-client-iv6ues4bu-abhay-narayans-projects.vercel.app',
+//     'http://localhost:3000'
    
+// ];
+
+// // CORS middleware
+// app.use(cors({
+//     origin: [process.env.FRONTEND_URL],
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true,
+// }))
+const allowedOrigins = [
+    'https://dashboard-client-iv6ues4bu-abhay-narayans-projects.vercel.app',
+    'http://localhost:3000'
 ];
 
 // CORS middleware
 app.use(cors({
-    origin: [process.env.FRONTEND_URL],
+    origin: function (origin, callback) {
+        console.log('Origin:', origin); // Debug log
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
-}))
+}));
 
 // Route splitting
 app.use("/api/data", reportRouter);
